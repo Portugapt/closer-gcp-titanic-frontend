@@ -2,8 +2,8 @@
   <span class="fill-remaining-space">Titanic Prediction</span>
 </mat-toolbar>
 
-<div class="container" *ngIf="!formTitanic; else forminfo" novalidate>
-  <form [formGroup]="titanicForm" (ngSubmit)="onSubmit()">
+<div class="container" *ngIf="formTitanic; else forminfo" novalidate>
+  <form [formGroup]="formTitanic" (ngSubmit)="onSubmit()">
     <mat-form-field class="form-element">
       <input
         matInput
@@ -72,7 +72,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="titanicForm.invalid"
+        [disabled]="formTitanic.invalid"
       >
         Submit
       </button>
@@ -81,9 +81,7 @@
 </div>
 
 <ng-template #forminfo>
-  <div class="container">
-    {{ post | json }}
-  </div>
+  <div class="container">Test</div>
 </ng-template>
 
 <div *ngIf="result">
