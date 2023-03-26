@@ -1,0 +1,99 @@
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">Titanic Prediction</span>
+</mat-toolbar>
+
+<div class="container" *ngIf="!formTitanic; else forminfo" novalidate>
+  <form [formGroup]="titanicForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-element">
+      <input
+        matInput
+        formControlName="Age"
+        placeholder="Age"
+        type="number"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field class="form-element">
+      <input
+        matInput
+        formControlName="SibSp"
+        type="number"
+        required
+        placeholder="SibSp"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="form-element">
+      <input
+        matInput
+        formControlName="Parch"
+        type="number"
+        required
+        placeholder="Parch"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="form-element">
+      <input
+        matInput
+        formControlName="Fare"
+        type="number"
+        required
+        placeholder="Fare"
+      />
+    </mat-form-field>
+
+    <div class="form-element">
+      <mat-radio-group formControlName="Sex" required>
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="form-element">
+      <mat-select formControlName="Embarked" required placeholder="Embarked">
+        <mat-option value="C">Cherbourg</mat-option>
+        <mat-option value="Q">Queenstown</mat-option>
+        <mat-option value="S">Southampton</mat-option>
+      </mat-select>
+    </div>
+
+    <div class="form-element">
+      <mat-select formControlName="Pclass" required placeholder="Pclass">
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+      </mat-select>
+    </div>
+
+    <div class="form-element">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="titanicForm.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+
+<ng-template #forminfo>
+  <div class="container">
+    {{ post | json }}
+  </div>
+</ng-template>
+
+<div *ngIf="result">
+  <h2>Result</h2>
+  <p>
+    {{
+      result.prediction === 1
+        ? 'The Passenger Survived'
+        : 'The Passenger did not survive'
+    }}
+  </p>
+  <p>Prediction UUID: {{ result.uuid }}</p>
+</div>
